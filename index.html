@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NKC Score</title>
+<meta name="description" content="NKC Score: painel de estatísticas do Beisebol Infantil 2026 e súmula de jogos offline.">
+<meta name="theme-color" content="#394156">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NKC Score">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#394156;--bg2:#2E3548;--card:#424B63;--line:#525C77;--ink:#F1F4F8;--muted:#B5BDCC;--mint:#7CCFC3;--fire:#F08A24;
+  --f-display:"Roboto Condensed","Arial Narrow","Helvetica Neue",system-ui,sans-serif;--f-body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-body);
+  padding:max(20px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:22px;min-height:calc(100vh - 44px);min-height:calc(100dvh - 44px)}
+.cover{display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:4vh;text-align:center}
+.cover img{width:min(88%,420px);height:auto;display:block}
+.cover h1{font:700 30px/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;margin:6px 0 0}
+.cover p{margin:0;color:var(--muted);font-size:14px}
+nav{display:flex;flex-direction:column;gap:12px}
+.go{display:grid;grid-template-columns:52px minmax(0,1fr) 18px;gap:14px;align-items:center;text-decoration:none;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;min-height:84px;transition:transform .08s}
+.go:active{transform:scale(.985)}
+.go:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.go .ic{width:52px;height:52px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(124,207,195,.14);color:var(--mint)}
+.go.s .ic{background:rgba(240,138,36,.16);color:var(--fire)}
+.go svg{width:28px;height:28px}
+.go b{display:block;font:700 19px/1.15 var(--f-display);letter-spacing:.03em}
+.go span.d{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.go .ar{color:var(--muted);font-size:22px}
+.foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;font-size:12px;color:var(--muted)}
+.st{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:99px;background:rgba(0,0,0,.18)}
+.st i{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.st.ok i{background:var(--mint)}
+.inst{appearance:none;border:1px solid var(--mint);background:transparent;color:var(--mint);font:600 14px var(--f-body);border-radius:10px;padding:10px 16px;min-height:44px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.go{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="cover">
+    <img src="logo.webp" alt="NKC Baseball" width="663" height="307">
+    <h1>NKC Score</h1>
+    <p>Estatísticas e súmula de beisebol, funcionando sem internet</p>
+  </header>
+  <nav aria-label="Menu principal">
+    <a class="go" href="painel.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M2 20h20"/></svg></span>
+      <span><b>Painel de estatísticas</b><span class="d">Beisebol Infantil 2026 · rebatida, arremesso, defesa e spray chart por campeonato, clube, equipe e atleta</span></span>
+      <span class="ar" aria-hidden="true">›</span>
+    </a>
+    <a class="go s" href="sumula.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 9-9 9-9-9z"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg></span>
+      <span><b>Marcar jogos</b><span class="d">Súmula arremesso a arremesso, elenco, números e exportação para Excel, CSV e backup</span></span>
+      <span class="ar" aria-hidden="true">›</span>
+    </a>
+  </nav>
+  <footer class="foot">
+    <button class="inst" id="inst" hidden>Instalar NKC Score no celular</button>
+    <span class="st" id="st"><i></i><span id="stt">Verificando modo offline…</span></span>
+    <span>Dados do painel: WBSC Brasil (extração 20–21/10/2026). Súmulas ficam salvas só neste aparelho.</span>
+  </footer>
+</div>
+<script>
+const st=document.getElementById('st'),stt=document.getElementById('stt');
+function setSt(ok,t){st.classList.toggle('ok',ok);stt.textContent=t;}
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  navigator.serviceWorker.register('sw.js').then(()=>navigator.serviceWorker.ready).then(()=>setSt(true,'Pronto para usar offline'))
+    .catch(()=>setSt(false,'Modo offline indisponível neste navegador'));
+}else setSt(false,'Abra pelo endereço https para ativar o modo offline');
+let deferred=null;const btn=document.getElementById('inst');
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;btn.hidden=false;});
+btn.addEventListener('click',async()=>{if(!deferred) return;deferred.prompt();await deferred.userChoice;deferred=null;btn.hidden=true;});
+addEventListener('appinstalled',()=>{btn.hidden=true;});
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();}catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+NKC Score — como publicar e instalar (gratuito)
+
+1. Crie uma conta gratuita em github.com, crie um repositório público "nkcscore"
+   e envie TODOS os arquivos desta pasta (Add file > Upload files).
+2. No repositório: Settings > Pages > Branch "main" / pasta "/ (root)" > Save.
+   Em ~1 minuto o app fica em https://SEU-USUARIO.github.io/nkcscore/
+3. No celular, abra esse endereço no Chrome (Android) ou Safari (iPhone) uma vez com internet.
+   Android: menu ⋮ > "Instalar app" (ou o botão "Instalar" na capa).
+   iPhone: Compartilhar > "Adicionar à Tela de Início".
+4. Pronto: o ícone NKC Score abre o menu e funciona sem internet.
+
+Atualizar o painel ou a súmula: troque o arquivo no GitHub e mude a versão em sw.js
+(linha const V='nkcscore-v1' -> 'nkcscore-v2'). Os jogos marcados no celular são mantidos.
+
+Opcional (APK Android): cole o endereço do GitHub Pages em https://www.pwabuilder.com
+e gere o pacote Android gratuitamente.
