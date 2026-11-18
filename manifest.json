@@ -1,7 +1,7 @@
 {
   "name": "NKC Score",
   "short_name": "NKC Score",
-  "description": "Painel de estatísticas do Beisebol Infantil 2026 e súmula de jogos offline.",
+  "description": "NKC Score v2 (Nov/2026) · Desenvolvedor R. T. O. · Súmula de beisebol offline com súmula oficial WBSC, estatísticas 2026 e Pitcher Data.",
   "id": "./",
   "start_url": "./index.html",
   "scope": "./",
@@ -10,6 +10,7 @@
   "background_color": "#394156",
   "theme_color": "#394156",
   "lang": "pt-BR",
+  "version": "2.0.0",
   "icons": [
     {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
     {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},

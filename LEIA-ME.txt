@@ -1,16 +1,32 @@
-NKC Score — como publicar e instalar (gratuito)
+NKC Score · Versão 2 · Nov/2026 · Desenvolvedor: R. T. O.
 
-1. Crie uma conta gratuita em github.com, crie um repositório público "nkcscore"
-   e envie TODOS os arquivos desta pasta (Add file > Upload files).
-2. No repositório: Settings > Pages > Branch "main" / pasta "/ (root)" > Save.
-   Em ~1 minuto o app fica em https://SEU-USUARIO.github.io/nkcscore/
-3. No celular, abra esse endereço no Chrome (Android) ou Safari (iPhone) uma vez com internet.
-   Android: menu ⋮ > "Instalar app" (ou o botão "Instalar" na capa).
-   iPhone: Compartilhar > "Adicionar à Tela de Início".
-4. Pronto: o ícone NKC Score abre o menu e funciona sem internet.
+CONTEÚDO DA PASTA
+  index.html               app completo (marcação de jogo, estatísticas 2026, Pitcher Data, súmula WBSC)
+  manifest.json            nome, ícone e cores do app instalado
+  sw.js                    funcionamento offline (cache)
+  icon-192.png, icon-512.png, icon-maskable-512.png, apple-touch-icon.png   ícones com a logo NKC
 
-Atualizar o painel ou a súmula: troque o arquivo no GitHub e mude a versão em sw.js
-(linha const V='nkcscore-v1' -> 'nkcscore-v2'). Os jogos marcados no celular são mantidos.
+PUBLICAR NO GITHUB (gratuito)
+1. Descompacte o zip. No repositório (ex.: nkcscore), use Add file > Upload files e envie
+   TODOS os arquivos acima para a raiz, substituindo os da versão 1. Commit.
+   (Os arquivos da v1 painel.html, sumula.html e logo.webp podem ser apagados: a v2 é um arquivo só.)
+2. Settings > Pages > Branch "main" / "/ (root)" > Save.
+   Endereço: https://SEU-USUARIO.github.io/nkcscore/
+3. No celular, abra o endereço uma vez com internet.
+   Android (Chrome): menu ⋮ > "Instalar app".  iPhone (Safari): Compartilhar > "Adicionar à Tela de Início".
+   Se a v1 já estava instalada, abra o app com internet e feche/abra de novo para carregar a v2.
 
-Opcional (APK Android): cole o endereço do GitHub Pages em https://www.pwabuilder.com
-e gere o pacote Android gratuitamente.
+ATENÇÃO AOS DADOS
+  Os jogos ficam salvos no celular. Antes de atualizar, faça "Exportar > Backup completo".
+  A v2 usa o mesmo endereço e a mesma chave de dados do HTML, mas jogos marcados em outro
+  endereço (ex.: arquivo aberto direto do celular) precisam ser trazidos com "Restaurar de um backup".
+
+SÚMULA OFICIAL WBSC (novo na v2)
+  Ao encerrar o jogo abre a tela "Súmula oficial WBSC". Também em Jogos > (jogo) > Súmula WBSC
+  e na tela de WhatsApp do jogo. Gera PDF A4 paisagem com 2 páginas (HOME e VISITOR), offline.
+  Campos do cabeçalho (torneio, árbitros, anotadores etc.) podem ser preenchidos na própria tela.
+  Conferir antes de homologar: corridas limpas (ER) calculadas automaticamente, W/L/S e braço (T)
+  em branco, posições em campo do adversário não são registradas pelo app.
+
+PRÓXIMAS ATUALIZAÇÕES
+  Troque o arquivo no GitHub e mude a versão em sw.js (const V='nkcscore-v2-2026-11' -> outro nome).
